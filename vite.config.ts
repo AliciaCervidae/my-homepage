@@ -8,7 +8,6 @@ import path from "path";
 export default defineConfig({
   plugins: [
     react(),
-    miaodaDevPlugin(),
     svgr({
       svgrOptions: {
         icon: true,
@@ -16,6 +15,7 @@ export default defineConfig({
         namedExport: "ReactComponent",
       },
     }),
+    miaodaDevPlugin(),
   ],
   resolve: {
     alias: {
