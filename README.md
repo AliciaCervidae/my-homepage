@@ -67,7 +67,7 @@
 
 ### 其他工具
 - **设计工具**：Figma
-- **图片处理**：Adobe / Affinity
+- **图片处理**：Adobe / Pixelmator Pro
 - **绘画工具**：Clip Studio Paint
 
 
