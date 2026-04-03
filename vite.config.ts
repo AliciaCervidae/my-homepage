@@ -23,4 +23,8 @@ export default defineConfig({
     },
   },
   base: '/my-homepage/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
 });
