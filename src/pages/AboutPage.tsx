@@ -13,7 +13,7 @@ export default function AboutPage() {
           </div>
 
           {/* 关于内容 */}
-          <Card className="border-border bg-card">
+          <Card className="border-border bg-card rounded-3xl">
             <CardContent className="p-6 space-y-4">
               <h2 className="text-xl font-semibold text-foreground">个人介绍</h2>
               <p className="text-muted-foreground">

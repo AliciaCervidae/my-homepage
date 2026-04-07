@@ -52,9 +52,9 @@ export default function ProjectsSection() {
           {/* 作品列表 */}
           <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <Card 
-                key={project.id} 
-                className="border-border/50 bg-card hover:shadow-md transition-shadow flex flex-col h-full"
+              <Card
+                key={project.id}
+                className="border-border/50 bg-card hover:shadow-md transition-shadow flex flex-col h-full rounded-3xl"
               >
                 <CardHeader className="pb-4">
                   <CardTitle className="text-lg font-semibold text-foreground">
@@ -70,10 +70,10 @@ export default function ProjectsSection() {
                   </p>
                 </CardContent>
                 <CardFooter className="mt-auto">
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="w-full gap-2"
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="w-full gap-2 bg-[#B27F9E] hover:bg-[#B27F9E]/90 text-white rounded-3xl"
                     asChild
                   >
                     <a href={project.link} target="_blank" rel="noopener noreferrer">
