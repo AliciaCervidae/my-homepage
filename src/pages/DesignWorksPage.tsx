@@ -54,7 +54,7 @@ export default function DesignWorksPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* 页面头部 */}
-      <header className="py-8 px-4 bg-muted/30 border-b border-border">
+      <header className="py-12 px-4 bg-muted/30 border-b border-border" style={{ paddingTop: '65px' }}>
         <div className="container max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold">设计</h1>
           <p className="text-muted-foreground mt-2">独立设计作品集，包含UI、UX和平面设计项目</p>
