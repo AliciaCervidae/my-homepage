@@ -1,8 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import IntersectObserver from '@/components/common/IntersectObserver';
 import Navigation from '@/components/common/Navigation';
 import { Toaster } from '@/components/ui/sonner';
+
+// 滚动到顶部组件
+function ScrollToTop() {
+  const location = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+  
+  return null;
+}
 
 import routes from './routes';
 
@@ -12,6 +23,7 @@ import routes from './routes';
 const App: React.FC = () => {
   return (
     <Router basename="/my-homepage">
+      <ScrollToTop />
       {/*<AuthProvider>*/}
       {/*<RouteGuard>*/}
       <IntersectObserver />

@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface Project {
   id: number;
@@ -13,23 +14,23 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: '博客文章',
+    title: '博客',
     description: 'Design/Coding/illustration',
-    link: '#',
+    link: '/blog',
     tags: ['React', 'Tailwind CSS', '前端']
   },
   {
     id: 2,
-    title: '设计作品',
+    title: '设计',
     description: '独立设计作品集',
-    link: '#',
+    link: '/design-works',
     tags: ['UI', '平面', 'UX']
   },
   {
     id: 3,
-    title: '绘画作品',
+    title: '绘画',
     description: '个人绘画作品的在线展示，包含不同风格和主题的艺术作品。',
-    link: '#',
+    link: '/artworks',
     tags: ['艺术', '绘画', '设计']
   }
 ];
@@ -76,10 +77,10 @@ export default function ProjectsSection() {
                     className="w-full gap-2 bg-[#B27F9E] hover:bg-[#B27F9E]/90 text-white rounded-3xl"
                     asChild
                   >
-                    <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    <Link to={project.link}>
                       查看详情
                       <ExternalLink className="w-3 h-3" />
-                    </a>
+                    </Link>
                   </Button>
                 </CardFooter>
               </Card>
