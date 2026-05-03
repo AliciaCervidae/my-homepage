@@ -1,6 +1,7 @@
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 import DesignWorksPage from './pages/DesignWorksPage';
 import ArtworksPage from './pages/ArtworksPage';
 import type { ReactNode } from 'react';
@@ -26,20 +27,23 @@ const routes: RouteConfig[] = [
   {
     name: '博客',
     path: '/blog',
-    element: <BlogPage />,
+    element: <BlogPage />
+  },
+  {
+    name: '博客文章',
+    path: '/blog/:id',
+    element: <BlogPostPage />,
     visible: false
   },
   {
     name: '设计',
     path: '/design-works',
-    element: <DesignWorksPage />,
-    visible: false
+    element: <DesignWorksPage />
   },
   {
     name: '绘画',
     path: '/artworks',
-    element: <ArtworksPage />,
-    visible: false
+    element: <ArtworksPage />
   }
 ];
 

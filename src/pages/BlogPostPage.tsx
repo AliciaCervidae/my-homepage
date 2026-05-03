@@ -1,0 +1,45 @@
+import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { ArrowLeft } from 'lucide-react';
+import { getBlogPost } from 'virtual:blog-posts';
+
+export default function BlogPostPage() {
+  const { id } = useParams();
+  const post = id ? getBlogPost(id) : undefined;
+
+  if (!post) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center gap-4">
+        <p className="text-muted-foreground">文章不存在</p>
+        <Link to="/blog" className="text-primary hover:underline">返回博客</Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="py-8 px-4 border-b border-border" style={{ paddingTop: '65px' }}>
+        <div className="container max-w-3xl mx-auto">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            返回博客
+          </Link>
+        </div>
+      </header>
+
+      <main className="container max-w-3xl mx-auto py-8 px-4">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-foreground">{post.title}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{post.date}</p>
+        </div>
+        <article className="prose prose-neutral dark:prose-invert max-w-none">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+        </article>
+      </main>
+    </div>
+  );
+}

@@ -1,24 +1,33 @@
 #!/bin/bash
 
-ast-grep scan -r .rules/SelectItem.yml
+if command -v ast-grep >/dev/null 2>&1; then
+    AST_GREP_BIN="$(command -v ast-grep)"
+elif command -v sg >/dev/null 2>&1; then
+    AST_GREP_BIN="$(command -v sg)"
+else
+    echo "⚠️  ast-grep is not installed; skipping .rules scans."
+    exit 0
+fi
 
-ast-grep scan -r .rules/contrast.yml
+"$AST_GREP_BIN" scan -r .rules/SelectItem.yml
 
-ast-grep scan -r .rules/supabase-google-sso.yml
+"$AST_GREP_BIN" scan -r .rules/contrast.yml
 
-ast-grep scan -r .rules/toast-hook.yml
+"$AST_GREP_BIN" scan -r .rules/supabase-google-sso.yml
 
-ast-grep scan -r .rules/slot-nesting.yml
+"$AST_GREP_BIN" scan -r .rules/toast-hook.yml
 
-ast-grep scan -r .rules/require-button-interaction.yml
+"$AST_GREP_BIN" scan -r .rules/slot-nesting.yml
 
-useauth_output=$(ast-grep scan -r .rules/useAuth.yml 2>/dev/null)
+"$AST_GREP_BIN" scan -r .rules/require-button-interaction.yml
+
+useauth_output=$("$AST_GREP_BIN" scan -r .rules/useAuth.yml 2>/dev/null)
 
 if [ -z "$useauth_output" ]; then
     exit 0
 fi
 
-authprovider_output=$(ast-grep scan -r .rules/authProvider.yml 2>/dev/null)
+authprovider_output=$("$AST_GREP_BIN" scan -r .rules/authProvider.yml 2>/dev/null)
 
 if [ -n "$authprovider_output" ]; then
     exit 0

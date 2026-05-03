@@ -1,54 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExternalLink } from 'lucide-react';
+import { blogPosts } from 'virtual:blog-posts';
 
-// 模拟博客文章数据
-interface BlogPost {
-  id: number;
-  title: string;
-  date: string;
-  description: string;
-  image?: string;
-  link: string;
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    title: 'React + Tailwind CSS 设计系统搭建',
-    date: '2024-04-15',
-    description: '详细介绍如何使用React和Tailwind CSS搭建一套完整的设计系统，包含组件库、设计规范和最佳实践。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
-    link: '#'
-  },
-  {
-    id: 2,
-    title: '前端性能优化实战指南',
-    date: '2024-04-10',
-    description: '从代码分割、懒加载、缓存策略等多个角度，详细讲解前端性能优化的方法和技巧。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
-    link: '#'
-  },
-  {
-    id: 3,
-    title: '响应式设计最佳实践',
-    date: '2024-04-05',
-    description: '探讨如何设计和实现真正的响应式网站，包括布局策略、媒体查询和适配不同设备的技巧。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
-    link: '#'
-  }
-];
+const POSTS_PER_PAGE = 6;
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const posts = blogPosts;
 
-  // 过滤博客文章
-  const filteredPosts = blogPosts.filter(post => 
+  const filteredPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     post.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (totalPages > 0 && currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  const goToPage = (page: number) => {
+    const nextPage = Math.min(Math.max(page, 1), totalPages);
+
+    setCurrentPage(nextPage);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -76,13 +64,13 @@ export default function BlogPage() {
       {/* 文章列表 */}
       <div className="container max-w-4xl mx-auto py-4 px-4">
         <div className="grid gap-6 md:gap-8">
-          {filteredPosts.map((post) => (
+          {paginatedPosts.map((post) => (
             <Card key={post.id} className="border-border/50 bg-card hover:shadow-md transition-shadow rounded-3xl overflow-hidden">
               {post.image && (
                 <div className="w-full h-48 md:h-64 overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
+                  <img
+                    src={post.image}
+                    alt={post.title}
                     className="w-full h-full object-cover transition-transform hover:scale-105"
                   />
                 </div>
@@ -107,16 +95,76 @@ export default function BlogPage() {
                   className="gap-2 bg-[#B27F9E] hover:bg-[#B27F9E]/90 text-white rounded-2xl"
                   asChild
                 >
-                  <a href={post.link} target="_blank" rel="noopener noreferrer">
+                  <Link to={`/blog/${post.id}`}>
                     阅读全文
                     <ExternalLink className="w-3 h-3" />
-                  </a>
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
           ))}
         </div>
+
+        {totalPages > 1 && (
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <div className="text-sm text-muted-foreground">
+              第 {currentPage} / {totalPages} 页
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 p-2 shadow-lg backdrop-blur-lg">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="rounded-full px-4 text-muted-foreground hover:bg-white/20"
+                disabled={currentPage === 1}
+                onClick={() => goToPage(currentPage - 1)}
+              >
+                上一页
+              </Button>
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                <Button
+                  key={page}
+                  type="button"
+                  variant={page === currentPage ? 'default' : 'ghost'}
+                  size="icon"
+                  className={
+                    page === currentPage
+                      ? 'h-9 w-9 rounded-full bg-[#B27F9E] text-white hover:bg-[#B27F9E]/90'
+                      : 'h-9 w-9 rounded-full text-muted-foreground hover:bg-white/20'
+                  }
+                  aria-current={page === currentPage ? 'page' : undefined}
+                  onClick={() => goToPage(page)}
+                >
+                  {page}
+                </Button>
+              ))}
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="rounded-full px-4 text-muted-foreground hover:bg-white/20"
+                disabled={currentPage === totalPages}
+                onClick={() => goToPage(currentPage + 1)}
+              >
+                下一页
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* 空状态 */}
+      {filteredPosts.length === 0 && posts.length > 0 && (
+        <div className="container max-w-4xl mx-auto py-12 px-4 text-center">
+          <p className="text-muted-foreground">没有找到匹配的文章</p>
+        </div>
+      )}
+
+      {posts.length === 0 && !searchTerm && (
+        <div className="container max-w-4xl mx-auto py-12 px-4 text-center">
+          <p className="text-muted-foreground">还没有文章。把 Markdown 文件放进 public/posts 就会自动发布。</p>
+        </div>
+      )}
 
       {/* 页脚 */}
       <footer className="py-8 text-center text-sm text-muted-foreground border-t border-border">

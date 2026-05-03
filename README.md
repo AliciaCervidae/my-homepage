@@ -12,6 +12,7 @@
 - **响应式设计**：适配桌面端、平板和移动设备
 - **现代化 UI**：使用 Tailwind CSS 和 Radix UI 组件库
 - **平滑过渡**：添加了交互动画效果
+- **Markdown 博客**：把 `.md` 文件放进 `public/posts`，构建时会自动生成博客列表和详情页
 
 ### 网站目的
 
@@ -75,4 +76,3 @@
 
 - **邮箱**：irisafterrain@outlook.com
 - **GitHub**：[AliciaCervidae](https://github.com/AliciaCervidae)
-

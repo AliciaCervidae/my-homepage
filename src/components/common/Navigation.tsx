@@ -5,6 +5,7 @@ import routes from '@/routes';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const visibleRoutes = routes.filter((route) => route.visible !== false);
 
   return (
     <div className="fixed top-4 left-4 z-50">
@@ -25,9 +26,9 @@ export default function Navigation() {
       {isOpen && (
         <div className="mt-2 w-64 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg p-4 animate-fade-in">
           <nav className="space-y-2">
-            {routes.map((route, index) => (
+            {visibleRoutes.map((route) => (
               <Link
-                key={index}
+                key={route.path}
                 to={route.path}
                 className="block px-4 py-2 rounded-lg hover:bg-white/20 transition-all duration-200 text-muted-foreground"
                 onClick={() => setIsOpen(false)}
