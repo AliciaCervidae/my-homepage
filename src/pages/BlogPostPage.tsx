@@ -19,7 +19,7 @@ export default function BlogPostPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="py-8 px-4 border-b border-border" style={{ paddingTop: '65px' }}>
+      <header className="pt-[65px] pb-8 border-b border-border">
         <div className="container max-w-3xl mx-auto">
           <Link
             to="/blog"
@@ -31,7 +31,7 @@ export default function BlogPostPage() {
         </div>
       </header>
 
-      <main className="container max-w-3xl mx-auto py-8 px-4">
+      <main className="container max-w-3xl mx-auto py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-foreground">{post.title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{post.date}</p>

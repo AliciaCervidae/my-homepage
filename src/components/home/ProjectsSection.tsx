@@ -1,6 +1,4 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 
 interface Project {
@@ -53,37 +51,27 @@ export default function ProjectsSection() {
           {/* 作品列表 */}
           <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <Card
+              <Link
                 key={project.id}
-                className="border-border/50 bg-card hover:shadow-md transition-shadow flex flex-col h-full rounded-3xl"
+                to={project.link}
+                className="block"
               >
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-lg font-semibold text-foreground">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-muted-foreground">
-                    {project.tags.join(' · ')}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-sm text-foreground">
-                    {project.description}
-                  </p>
-                </CardContent>
-                <CardFooter className="mt-auto">
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="w-full gap-2 bg-[#B27F9E] hover:bg-[#B27F9E]/90 text-white rounded-3xl"
-                    asChild
-                  >
-                    <Link to={project.link}>
-                      查看详情
-                      <ExternalLink className="w-3 h-3" />
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+                <Card className="border-border/50 bg-card hover:shadow-[0_0_15px_3px_rgba(139,92,246,0.2),0_0_35px_6px_rgba(59,130,246,0.15)] transition-shadow flex flex-col h-full rounded-3xl cursor-pointer hover:-translate-y-1">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-lg font-semibold text-foreground">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm text-muted-foreground">
+                      {project.tags.join(' · ')}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-1">
+                    <p className="text-sm text-foreground">
+                      {project.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

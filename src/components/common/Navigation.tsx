@@ -12,7 +12,7 @@ export default function Navigation() {
       {/* 导航按钮 */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-2"
+        className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg hover:bg-white/20 hover:shadow-[0_0_15px_3px_rgba(139,92,246,0.2),0_0_35px_6px_rgba(59,130,246,0.15)] transition-all duration-300 flex items-center gap-2"
       >
         {isOpen ? (
           <X className="w-4 h-4 text-muted-foreground" />

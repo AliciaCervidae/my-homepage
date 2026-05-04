@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ExternalLink } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { blogPosts } from 'virtual:blog-posts';
 
 const POSTS_PER_PAGE = 6;
@@ -41,7 +39,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* 页面头部 */}
-      <header className="py-12 px-4 bg-muted/30 border-b border-border" style={{ paddingTop: '65px' }}>
+      <header className="pt-[65px] pb-12 bg-muted/30 border-b border-border">
         <div className="container max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold">博客</h1>
           <p className="text-muted-foreground mt-2">分享前端开发、设计和技术相关的文章</p>
@@ -49,7 +47,7 @@ export default function BlogPage() {
       </header>
 
       {/* 搜索栏 */}
-      <div className="container max-w-4xl mx-auto py-6 px-4">
+      <div className="container max-w-4xl mx-auto py-6">
         <div className="relative">
           <input
             type="text"
@@ -62,46 +60,39 @@ export default function BlogPage() {
       </div>
 
       {/* 文章列表 */}
-      <div className="container max-w-4xl mx-auto py-4 px-4">
+      <div className="container max-w-4xl mx-auto py-4">
         <div className="grid gap-6 md:gap-8">
           {paginatedPosts.map((post) => (
-            <Card key={post.id} className="border-border/50 bg-card hover:shadow-md transition-shadow rounded-3xl overflow-hidden">
-              {post.image && (
-                <div className="w-full h-48 md:h-64 overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                  />
-                </div>
-              )}
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-xl font-semibold text-foreground">
-                    {post.title}
-                  </CardTitle>
-                  <span className="text-sm text-muted-foreground">{post.date}</span>
-                </div>
-              </CardHeader>
-              <CardContent className="pb-4">
-                <p className="text-sm text-foreground">
-                  {post.description}
-                </p>
-              </CardContent>
-              <CardFooter className="mt-auto">
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="gap-2 bg-[#B27F9E] hover:bg-[#B27F9E]/90 text-white rounded-2xl"
-                  asChild
-                >
-                  <Link to={`/blog/${post.id}`}>
-                    阅读全文
-                    <ExternalLink className="w-3 h-3" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+            <Link
+              key={post.id}
+              to={`/blog/${post.id}`}
+              className="block"
+            >
+              <Card className="border-border/50 bg-card hover:shadow-[0_0_15px_3px_rgba(139,92,246,0.2),0_0_35px_6px_rgba(59,130,246,0.15)] hover:-translate-y-1 transition-all rounded-3xl overflow-hidden cursor-pointer">
+                {post.image && (
+                  <div className="w-full h-48 md:h-64 overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform hover:scale-105"
+                    />
+                  </div>
+                )}
+                <CardHeader className="pb-2">
+                  <div className="flex justify-between items-start">
+                    <CardTitle className="text-xl font-semibold text-foreground">
+                      {post.title}
+                    </CardTitle>
+                    <span className="text-sm text-muted-foreground">{post.date}</span>
+                  </div>
+                </CardHeader>
+                <CardContent className="pb-4">
+                  <p className="text-sm text-foreground">
+                    {post.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 

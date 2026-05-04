@@ -79,6 +79,11 @@ function getFallbackDescription(content: string) {
   return paragraph ? paragraph.replace(/\s+/g, " ").slice(0, 120) : "";
 }
 
+function extractFirstImage(content: string): string | undefined {
+  const imageMatch = content.match(/!\[.*?\]\((.*?)\)/);
+  return imageMatch ? imageMatch[1] : undefined;
+}
+
 function formatDate(date: Date) {
   return date.toISOString().slice(0, 10);
 }
@@ -145,7 +150,7 @@ function blogPostsPlugin(): Plugin {
             title: frontmatter.title || getFallbackTitle(content, id),
             date: frontmatter.date || formatDate(stats.mtime),
             description: frontmatter.description || getFallbackDescription(content),
-            image: frontmatter.image,
+            image: frontmatter.image || extractFirstImage(content),
             content,
           };
         }),
