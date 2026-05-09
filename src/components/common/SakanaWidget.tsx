@@ -7,7 +7,7 @@ export default function SakanaWidget() {
     if (!containerRef.current) return;
 
     const isMobile = window.innerWidth < 768;
-    const scale = isMobile ? 0.6 : 0.5;
+    const scale = isMobile ? 0.3 : 0.5;
 
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/sakana';
