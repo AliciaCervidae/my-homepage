@@ -24,4 +24,4 @@ console.log(hello);
 
 也可以添加图片：
 
-![示例图片](https://picsum.photos/600/400)
+![示例图片](/images/Content/Facebookpost-1.png)

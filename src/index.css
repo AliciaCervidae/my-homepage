@@ -107,4 +107,32 @@ All colors MUST be HSL.
       transform: translateY(0);
     }
   }
+
+  /* 触摸屏设备：禁用 hover 效果，改用 active 点击效果 */
+  @media (hover: none) and (pointer: coarse) {
+    .work-card .card-glow:hover {
+      box-shadow: none !important;
+    }
+    .work-card .card-glow:active {
+      box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.2), 0 0 35px 6px rgba(59, 130, 246, 0.15) !important;
+      transform: translateY(-1px);
+    }
+
+    /* 暗色模式 + 触摸屏 */
+    .dark .work-card .card-glow:hover {
+      box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.5), 0 0 35px 6px rgba(59, 130, 246, 0.35) !important;
+    }
+    .dark .work-card .card-glow:active {
+      box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.5), 0 0 35px 6px rgba(59, 130, 246, 0.35) !important;
+      transform: translateY(-1px);
+    }
+  }
+
+  /* 暗色模式：光效更亮（桌面端） */
+  .dark .card-glow:hover {
+    box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.5), 0 0 35px 6px rgba(59, 130, 246, 0.35) !important;
+  }
+  .dark .card-glow:active {
+    box-shadow: 0 0 15px 3px rgba(139, 92, 246, 0.5), 0 0 35px 6px rgba(59, 130, 246, 0.35) !important;
+  }
 }

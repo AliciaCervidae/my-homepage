@@ -19,7 +19,7 @@ const artworks: Artwork[] = [
     title: '城市风景',
     style: '写实',
     description: '以城市建筑为主题的写实风格绘画，捕捉现代都市的光影变化。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
+    image: '/images/Content/Facebookpost-1.png',
     link: '#'
   },
   {
@@ -27,7 +27,7 @@ const artworks: Artwork[] = [
     title: '抽象表达',
     style: '抽象',
     description: '通过色彩和线条表达内心情感的抽象风格作品（测试用文本）。',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
+    image: '/images/Content/Facebookpost-1.png',
     link: '#'
   },
   {
@@ -35,7 +35,7 @@ const artworks: Artwork[] = [
     title: '自然景观',
     style: '水彩',
     description: '以自然风景为主题的水彩画作品，展现大自然的宁静与美丽。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
+    image: '/images/Content/Facebookpost-1.png',
     link: '#'
   }
 ];
@@ -86,12 +86,14 @@ export default function ArtworksPage() {
               href={artwork.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block"
+              className="block work-card"
             >
-              <Card className="border-border/50 bg-card hover:shadow-[0_0_15px_3px_rgba(139,92,246,0.2),0_0_35px_6px_rgba(59,130,246,0.15)] hover:-translate-y-1 transition-all rounded-3xl overflow-hidden cursor-pointer">
+              <Card className="border-border/50 bg-card hover:shadow-[0_0_15px_3px_rgba(139,92,246,0.2),0_0_35px_6px_rgba(59,130,246,0.15)] hover:-translate-y-1 transition-all rounded-3xl overflow-hidden cursor-pointer card-glow">
                 <div className="w-full h-48 md:h-56 overflow-hidden">
                   <img
-                    src={artwork.image}
+                    src={artwork.image?.startsWith('/')
+                      ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${artwork.image}`
+                      : artwork.image}
                     alt={artwork.title}
                     className="w-full h-full object-cover transition-transform hover:scale-105"
                   />

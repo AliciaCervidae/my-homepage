@@ -19,7 +19,7 @@ const designWorks: DesignWork[] = [
     title: '企业品牌设计',
     category: 'UI',
     description: '为科技公司设计的完整品牌视觉系统，包括logo、色彩系统和应用场景。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
+    image: '/images/Content/Facebookpost-1.png',
     link: '#'
   },
   {
@@ -27,7 +27,7 @@ const designWorks: DesignWork[] = [
     title: '移动应用界面设计',
     category: 'UX',
     description: '健康追踪应用的用户界面设计，注重用户体验和交互流畅度。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
+    image: '/images/Content/Facebookpost-1.png',
     link: '#'
   },
   {
@@ -35,7 +35,7 @@ const designWorks: DesignWork[] = [
     title: '电商网站设计',
     category: '平面',
     description: '时尚电商平台的网页设计，结合现代美学和用户友好的购物体验。（测试用文本）',
-    image: '/my-homepage/images/Content/Facebook post - 1.png',
+    image: '/images/Content/Facebookpost-1.png',
     link: '#'
   }
 ];
@@ -86,12 +86,14 @@ export default function DesignWorksPage() {
               href={work.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block"
+              className="block work-card"
             >
-              <Card className="border-border/50 bg-card hover:shadow-[0_0_15px_3px_rgba(139,92,246,0.2),0_0_35px_6px_rgba(59,130,246,0.15)] hover:-translate-y-1 transition-all rounded-3xl overflow-hidden cursor-pointer">
+              <Card className="border-border/50 bg-card hover:shadow-[0_0_15px_3px_rgba(139,92,246,0.2),0_0_35px_6px_rgba(59,130,246,0.15)] hover:-translate-y-1 transition-all rounded-3xl overflow-hidden cursor-pointer card-glow">
                 <div className="w-full h-48 md:h-56 overflow-hidden">
                   <img
-                    src={work.image}
+                    src={work.image?.startsWith('/')
+                      ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${work.image}`
+                      : work.image}
                     alt={work.title}
                     className="w-full h-full object-cover transition-transform hover:scale-105"
                   />

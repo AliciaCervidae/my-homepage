@@ -156,6 +156,7 @@ export default {
         tailwindAnimate,
         containerQuery,
         intersect,
+        require('@tailwindcss/typography'),
         function ({addUtilities}) {
             addUtilities(
                 {

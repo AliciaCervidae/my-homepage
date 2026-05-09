@@ -36,8 +36,21 @@ export default function BlogPostPage() {
           <h1 className="text-3xl font-bold text-foreground">{post.title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{post.date}</p>
         </div>
-        <article className="prose prose-neutral dark:prose-invert max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+        <article className="max-w-none prose prose-gray dark:prose-invert">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              img: ({ src, alt }) => {
+                const resolvedSrc =
+                  src && src.startsWith('/')
+                    ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${src}`
+                    : src;
+                return <img src={resolvedSrc} alt={alt} className="max-w-full h-auto rounded-lg" />;
+              },
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
         </article>
       </main>
     </div>
