@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import IntersectObserver from '@/components/common/IntersectObserver';
 import Navigation from '@/components/common/Navigation';
+import SakanaWidget from '@/components/common/SakanaWidget';
 import { Toaster } from '@/components/ui/sonner';
 
 // 滚动到顶部组件
@@ -44,6 +45,7 @@ const App: React.FC = () => {
         </main>
       </div>
       <Toaster />
+      <SakanaWidget />
       {/*</RouteGuard>*/}
       {/*</AuthProvider>*/}
     </Router>

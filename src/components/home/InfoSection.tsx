@@ -1,6 +1,6 @@
 export default function InfoSection() {
   return (
-    <section className="w-full py-12 md:py-16 px-4 bg-background">
+    <section className="w-full pt-3 md:pt-6 pb-12 md:pb-16 px-4 bg-background">
       <div className="container max-w-4xl mx-auto">
         <div className="flex flex-col items-center space-y-6">
           {/* 标题 */}

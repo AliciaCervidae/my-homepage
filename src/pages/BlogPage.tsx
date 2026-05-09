@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { blogPosts } from 'virtual:blog-posts';
 
 const POSTS_PER_PAGE = 6;
@@ -72,7 +73,9 @@ export default function BlogPage() {
                 {post.image && (
                   <div className="w-full h-48 md:h-64 overflow-hidden">
                     <img
-                      src={post.image}
+                      src={post.image?.startsWith('/')
+                        ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${post.image}`
+                        : post.image}
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform hover:scale-105"
                     />

@@ -2,7 +2,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 export default function HeroSection() {
   return (
-    <section className="w-full py-16 md:py-24 px-4">
+    <section className="w-full pt-16 md:pt-24 pb-4 md:pb-8 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="flex flex-col items-center text-center space-y-6">
           {/* 头像 */}
